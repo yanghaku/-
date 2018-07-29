@@ -1,7 +1,7 @@
 package server.Medical;
 
 import server.InfoObject;
-import server.CalculationParameter.Level;
+import server.CalculationParameter.*;
 /**
  *  @author yangbo
  *
@@ -21,7 +21,7 @@ public class Treatment extends InfoObject{
     private String range;         //限制使用的范围
 
     public Treatment(String code, String payType, Level payLevel, Level hospitalLevel,
-                     String name, String unit, String productedName,
+                     boolean needCheck, String name, String unit, String productedName,
                      String remark, String range){
         super(code);
         this.payType=payType;

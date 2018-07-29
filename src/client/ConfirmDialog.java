@@ -5,6 +5,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.scene.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ConfirmDialog {
     public static enum Response{
@@ -14,6 +15,7 @@ public class ConfirmDialog {
     public static void display(String title,String message){
         buttonSelected=Response.NO;
         Stage window=new Stage();
+        window.initStyle(StageStyle.UTILITY);
         VBox pane=new VBox();
         pane.setAlignment(Pos.CENTER);
         pane.setSpacing(10);

@@ -1,6 +1,7 @@
 package server;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.TreeMap;
 import server.RegistedObj.ObjName;
 
@@ -47,6 +48,10 @@ public class Manage{
 
     public void add(String idName,ObjName objName,InfoObject obj){
         catalogs.get(objName).add(obj);
+    }
+
+    public Iterator<InfoObject> getAll(ObjName objName){
+        return this.catalogs.get(objName).iterator();
     }
 
     public void update()throws IOException{

@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 public class CalculationParameter {
     // 以下枚举类型, 供系统使用
     public enum Level{
-        Zero,One,Two,Three,
+        Zero,One,Two,Three,Four,
     };
     public enum HostipalType{  // 医院类别
         Hospital,Community//医院, 社区
@@ -61,7 +61,19 @@ public class CalculationParameter {
         fw.write(toString());
         fw.close();
     }
-
+    public CalculationParameter(double workedUp,double retiredUp,double lretiredUp,double lworkedUp,
+                double lowerBound,double level1,double level2,double rate1,double rate2,double rate3){
+        this.workedUp=workedUp;
+        this.retiredUp=retiredUp;
+        this.LretiredUp=lretiredUp;
+        this.LworkedUp=lworkedUp;
+        this.LowerBound=lowerBound;
+        this.level1=level1;
+        this.level2=level2;
+        this.rate1=rate1;
+        this.rate2=rate2;
+        this.rate3=rate3;
+    }
     public CalculationParameter()throws IOException{
         BufferedReader br=new BufferedReader(new FileReader(fileName));
         StringTokenizer st=new StringTokenizer(br.readLine(),"_");
@@ -76,6 +88,46 @@ public class CalculationParameter {
         rate1=Double.parseDouble(st.nextToken());
         rate2=Double.parseDouble(st.nextToken());
         rate3=Double.parseDouble(st.nextToken());
+    }
+
+    public double getLevel1() {
+        return level1;
+    }
+
+    public double getLevel2() {
+        return level2;
+    }
+
+    public double getLowerBound() {
+        return LowerBound;
+    }
+
+    public double getLretiredUp() {
+        return LretiredUp;
+    }
+
+    public double getLworkedUp() {
+        return LworkedUp;
+    }
+
+    public double getRate1() {
+        return rate1;
+    }
+
+    public double getRate2() {
+        return rate2;
+    }
+
+    public double getRate3() {
+        return rate3;
+    }
+
+    public double getRetiredUp() {
+        return retiredUp;
+    }
+
+    public double getWorkedUp() {
+        return workedUp;
     }
 
     public void setLevel1(double level1) {
@@ -127,7 +179,7 @@ public class CalculationParameter {
           例: 200000_150000_120000_100000_100_10000_20000_0.2_0.1_0.05
 
          */
-        StringBuffer s=new StringBuffer();
+        StringBuilder s=new StringBuilder();
         s.append(workedUp);s.append('_');
         s.append(retiredUp);s.append('_');
         s.append(LworkedUp);s.append('_');

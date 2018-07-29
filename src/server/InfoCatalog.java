@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * @author yangbo
@@ -15,7 +16,7 @@ import java.util.HashMap;
  *
  */
 
-public abstract class InfoCatalog {
+public abstract class InfoCatalog implements Iterable<InfoObject>{
 
     protected HashMap<String,InfoObject> objects;
 
@@ -33,4 +34,8 @@ public abstract class InfoCatalog {
 
     public abstract void update() throws IOException;
 
+    // 返回值的迭代器, 只可以遍历获取信息, 但是不能修改;
+    public Iterator<InfoObject> iterator(){
+        return this.objects.values().iterator();
+    }
 }

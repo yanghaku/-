@@ -1,7 +1,7 @@
 package server.Medical;
 
 import server.InfoObject;
-import server.CalculationParameter.Level;
+import server.CalculationParameter.*;
 /**
  * 药品类
  * 其中数据包括: 药品编码, 收费类别, 处方药标志, 收费项目等级,
@@ -20,12 +20,12 @@ public class Medicine extends InfoObject {
     private String cName;           //中文名
     private String eName;           //英文名
     private boolean needCheck;      //是否需要审批
-    private Level hospitalLevel;    //医院等级
+    private Level hospitalLevel;//医院等级
     private double upperBound;      //最高限价
     private boolean isFromHospital; //院内制剂标志
     private String type;            //药品剂型
     private String unit;            //药品计量单位
-    private int frequency;          //使用频次
+    private String frequency;          //使用频次
     private String usage;           //用法
     private String upperDays;       //限定天数
     private String productedName;   //药厂名称
@@ -36,9 +36,9 @@ public class Medicine extends InfoObject {
 
 
     public Medicine(String code,String payType,boolean isPrescription,Level payLevel,
-                    String cName,String eName,boolean needCheck, Level hospitalLevel,
+                    String cName,String eName,boolean needCheck,Level hospitalLevel,
                     double upperBound,boolean isFromHospital, String type,String unit,
-                    int frequency,String usage,String upperDays, String productedName,
+                    String frequency,String usage,String upperDays, String productedName,
                     String productedArea,String countryCheck, String countryCode,String remark){
         super(code);
         this.payType=payType;
@@ -84,7 +84,7 @@ public class Medicine extends InfoObject {
 
     public String getUnit() {return unit; }
 
-    public int getFrequency() { return frequency; }
+    public String getFrequency() { return frequency; }
 
     public String getUsage() { return usage; }
 
@@ -122,7 +122,7 @@ public class Medicine extends InfoObject {
 
     public void setUnit(String unit) { this.unit = unit; }
 
-    public void setFrequency(int frequency) { this.frequency = frequency; }
+    public void setFrequency(String frequency) { this.frequency = frequency; }
 
     public void setUsage(String usage) { this.usage = usage; }
 
