@@ -1,11 +1,16 @@
 package client;
 import javafx.geometry.Pos;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.*;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
+
+/**
+ * @author yangbo
+ *
+ * 确认框
+ *
+ */
 
 public class ConfirmDialog {
     public static enum Response{
@@ -18,13 +23,13 @@ public class ConfirmDialog {
         window.initStyle(StageStyle.UTILITY);
         VBox pane=new VBox();
         pane.setAlignment(Pos.CENTER);
-        pane.setSpacing(10);
+        pane.setSpacing(15);
         Button btYes=new Button("确定");
         Button btNo=new Button("取消");
         HBox h=new HBox();
         h.getChildren().addAll(btYes,btNo);
         h.setAlignment(Pos.CENTER);
-        h.setSpacing(10);
+        h.setSpacing(19);
         pane.getChildren().addAll(new Label(message),h);
         btYes.setOnAction(e->{
             buttonSelected=Response.YES;
@@ -35,8 +40,10 @@ public class ConfirmDialog {
             window.close();
         });
         window.setTitle(title);
-        window.setResizable(false);
-        window.setScene(new Scene(pane));
+        StackPane s=new StackPane();
+        s.getChildren().add(pane);
+        s.setStyle("-fx-font-size: 19px;-fx-padding: 20");
+        window.setScene(new Scene(s));
         window.showAndWait();
     }
 }

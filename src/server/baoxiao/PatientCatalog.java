@@ -1,5 +1,4 @@
-package server.Social;
-
+package server.baoxiao;
 
 import server.InfoCatalog;
 import server.InfoObject;
@@ -10,23 +9,23 @@ import java.util.HashMap;
 /**
  * @author yangbo
  *
- * 组织的集合类, 负责维护所有的组织的目录
- * 其中实现的功能是  增删查改
+ * 就诊信息的集合类, 负责维护所有的就诊信息
  *
  */
-public class AssociationCatalog extends InfoCatalog {
-    private static final String fileName="database/association.dat";
 
-    public AssociationCatalog()throws IOException,ClassNotFoundException{
+public class PatientCatalog extends InfoCatalog {
+    private static final String fileName="database/patient.dat";
+
+    public PatientCatalog()throws IOException,ClassNotFoundException{
         ObjectInputStream in=new ObjectInputStream(new FileInputStream(fileName));
         Object obj=in.readObject();
         if(obj instanceof HashMap){
-            objects=((HashMap<String,InfoObject>)obj);
-        }else throw new IOException("Objects Error");
+            objects= ((HashMap<String,InfoObject>) obj);
+        }else throw new IOException("Object Error");
     }
     @Override
     public void add(InfoObject obj) {
-        if(obj instanceof Association)objects.put(obj.getCode(),obj);
+        if(obj instanceof Patient)objects.put(obj.getCode(),obj);
     }
 
     @Override
@@ -42,4 +41,5 @@ public class AssociationCatalog extends InfoCatalog {
         out.writeObject(objects);
         out.close();
     }
+
 }

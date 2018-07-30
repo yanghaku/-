@@ -273,6 +273,7 @@ public class SocialPane extends StackPane{
         btname.setOnAction(e->{
             if(name.getText()==null||name.getText().length()==0){
                 AlertDialog.display("错误","查找内容不能为空!");
+                return;
             }
             Iterator<InfoObject> it=main.getServerManage().getAll(ObjName.Person);
             Person ps=null;
@@ -294,8 +295,8 @@ public class SocialPane extends StackPane{
     private Pane personAdd(){
         GridPane pane=new GridPane();
         pane.add(new Label("人员编号"),1,1);
-        pane.add(new Label("ID类型"),1,2);
-        pane.add(new Label("身份证号"),1,3);
+        pane.add(new Label("证件类型"),1,2);
+        pane.add(new Label("证件编号"),1,3);
         pane.add(new Label("姓名"),1,4);
         pane.add(new Label("医疗人员类别"),1,5);
         pane.add(new Label("民族"),1,6);
@@ -306,7 +307,7 @@ public class SocialPane extends StackPane{
         pane.add(new Label("备注"),1,13);
         pane.add(new Label("单位编码"),1,12);
         pane.add(new Label("健康状况"),1,11);
-
+        pane.add(new Label("定点医疗机构编号"),1,14);
         pane.add(new Label("性别"),4,1);
         pane.add(new Label("是否退休"),4,2);
         pane.add(new Label("劳模标志"),4,3);
@@ -345,6 +346,8 @@ public class SocialPane extends StackPane{
         pane.add(associationCode,2,12);
         TextField health=new TextField();
         pane.add(health,2,11);
+        TextField ins=new TextField();
+        pane.add(ins,2,14);
 
         ChoiceBox<String> man= new ChoiceBox<>();
         man.getItems().addAll("男","女");
@@ -391,7 +394,7 @@ public class SocialPane extends StackPane{
             Person ps=new Person(code.getText(),idtype.getText(),idnum.getText(),name.getText(),s,xing,race.getText(),
                     bd,wd,rd,retired.isSelected(),idArea.getText(),educated.getText(),political.getText(),workform.getText(),
                     remark.getText(),associationCode.getText(),health.getText(),modelwork.isSelected(),leader.isSelected(),
-                    indatabase.isSelected(),farmer.isSelected(),soldier.isSelected());
+                    indatabase.isSelected(),farmer.isSelected(),soldier.isSelected(),ins.getText());
             main.getServerManage().add(main.getLoginId(),ObjName.Person,ps);
             AlertDialog.display("成功","增加成功!");
             main.goBack();
@@ -404,8 +407,8 @@ public class SocialPane extends StackPane{
 
         GridPane pane=new GridPane();
         pane.add(new Label("人员编号"),1,1);
-        pane.add(new Label("ID类型"),1,2);
-        pane.add(new Label("身份证号"),1,3);
+        pane.add(new Label("证件类型"),1,2);
+        pane.add(new Label("证件编号"),1,3);
         pane.add(new Label("姓名"),1,4);
         pane.add(new Label("医疗人员类别"),1,5);
         pane.add(new Label("民族"),1,6);
@@ -416,6 +419,7 @@ public class SocialPane extends StackPane{
         pane.add(new Label("备注"),1,13);
         pane.add(new Label("单位编码"),1,12);
         pane.add(new Label("健康状况"),1,11);
+        pane.add(new Label("定点医疗机构编号"),1,14);
 
         pane.add(new Label("性别"),4,1);
         pane.add(new Label("是否退休"),4,2);
@@ -457,6 +461,9 @@ public class SocialPane extends StackPane{
         TextField health=new TextField(ps.getHealth());
         pane.add(health,2,11);
 
+        TextField ins=new TextField();
+        pane.add(ins,2,14);
+        ins.setText(ps.getInstituton());
         ChoiceBox<String> man= new ChoiceBox<>();
         man.getItems().addAll("男","女");
         if(ps.isMan())man.setValue("男");
@@ -514,7 +521,7 @@ public class SocialPane extends StackPane{
             Person newPs=new Person(ps.getCode(),idtype.getText(),idnum.getText(),name.getText(),s,xing,race.getText(),
                     bd,wd,rd,retired.isSelected(),idArea.getText(),educated.getText(),political.getText(),workform.getText(),
                     remark.getText(),associationCode.getText(),health.getText(),modelwork.isSelected(),leader.isSelected(),
-                    indatabase.isSelected(),farmer.isSelected(),soldier.isSelected());
+                    indatabase.isSelected(),farmer.isSelected(),soldier.isSelected(),ins.getText());
             if(main.getServerManage().set(main.getLoginId(),ObjName.Person,ps.getCode(),newPs)){
                 AlertDialog.display("成功","修改保存成功!");
             }else AlertDialog.display("失败","修改失败!");

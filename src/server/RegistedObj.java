@@ -2,6 +2,9 @@ package server;
 
 import server.Medical.*;
 import server.Social.*;
+import server.baoxiao.BillInfomationCatalog;
+import server.baoxiao.PatientCatalog;
+import server.baoxiao.PrescriptionCatalog;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,6 +28,9 @@ public class RegistedObj {
         DiseaseSpecies,
         Person,
         Association,
+        Prescription,
+        Patient,
+        BillInformation,
     };
     public static final ObjName[] ObjList= new ObjName[]{
             ObjName.Medicine,
@@ -34,6 +40,9 @@ public class RegistedObj {
             ObjName.DiseaseSpecies,
             ObjName.Person,
             ObjName.Association,
+            ObjName.Prescription,
+            ObjName.Patient,
+            ObjName.BillInformation,
     };
     public static TreeMap<ObjName,InfoCatalog> init() throws IOException,ClassNotFoundException {
         TreeMap<ObjName,InfoCatalog> ans= new TreeMap<>();
@@ -45,7 +54,9 @@ public class RegistedObj {
         ans.put(ObjName.DiseaseSpecies,new DiseaseSpeciesCatalog());
         ans.put(ObjName.Person,new PersonCatalog());
         ans.put(ObjName.Association,new AssociationCatalog());
-
+        ans.put(ObjName.Prescription,new PrescriptionCatalog());
+        ans.put(ObjName.Patient,new PatientCatalog());
+        ans.put(ObjName.BillInformation,new BillInfomationCatalog());
         return ans;
     }
     public static void clearAndBuild()throws IOException{
@@ -68,6 +79,15 @@ public class RegistedObj {
         out.writeObject(new HashMap<String,InfoObject>());
         out.close();
         out=new ObjectOutputStream(new FileOutputStream("database/facilities.dat"));
+        out.writeObject(new HashMap<String,InfoObject>());
+        out.close();
+        out=new ObjectOutputStream(new FileOutputStream("database/patient.dat"));
+        out.writeObject(new HashMap<String,InfoObject>());
+        out.close();
+        out=new ObjectOutputStream(new FileOutputStream("database/prescription.dat"));
+        out.writeObject(new HashMap<String,InfoObject>());
+        out.close();
+        out=new ObjectOutputStream(new FileOutputStream("database/billinfrmation.dat"));
         out.writeObject(new HashMap<String,InfoObject>());
         out.close();
     }

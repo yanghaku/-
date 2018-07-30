@@ -22,8 +22,8 @@ public class OperatorID {
     };
 
     private HashMap<String,String> ids=new HashMap<>();
-    private String rootId;
-    private String rootPs;
+    private String rootId="root";
+    private String rootPs="f7c3bc1d808e04732adf679965ccc34ca7ae3441";//123456789
 
     public OperatorID()throws IOException {
         BufferedReader br=new BufferedReader(new FileReader("database/id.txt"));
@@ -37,15 +37,23 @@ public class OperatorID {
     public LoginErrors judgeId(String id,String password){
         String s=ids.get(id);
         if(s==null)return LoginErrors.idError;
-        if(s.equals(password))return LoginErrors.passwordError;
-        return LoginErrors.ok;
+        if(s.equals(password))return LoginErrors.ok;
+        return LoginErrors.passwordError;
     }
 
-    // 增加id , 系统管理员才可用
-    public void addId(String id,String password) throws IOException{
-        ids.put(id,password);
-        FileWriter fw=new FileWriter("database/ID/id.txttxt",true);
-        fw.write(id+" "+password+"\n");
-        fw.close();
+    // 增加id ,系统管理员才可用
+    public boolean addId(String opId,String opPass,String id,String password){
+        if(opId.equals(rootId)&&opPass.equals(rootPs)) {
+            ids.put(id, password);
+            try {
+                FileWriter fw = new FileWriter("database/id.txt", true);
+                fw.write("\n"+id + " " + password);
+                fw.close();
+                return true;
+            }catch (IOException e){
+                e.printStackTrace();
+                return false;
+            }
+        }else return false;
     }
 }

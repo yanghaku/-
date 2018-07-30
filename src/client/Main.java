@@ -35,7 +35,8 @@ public class Main extends Application{
 
 
 	public void start(Stage window){
-		//初始化数据库
+
+        //初始化数据库
         try {
             serverManage = new Manage();
         } catch (IOException e) {
@@ -43,13 +44,16 @@ public class Main extends Application{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-//        new Login(this);
-
+        new Login(this);
         frame=initFrame();
         panes=new Stack<>();
         mainPane=initMainPane();
-        mainScene=new Scene(mainPane,930,730);
-        mainScene.getStylesheets().add(getClass().getResource("/login.css").toExternalForm());
+        mainScene=new Scene(mainPane,970,750);
+        try {
+            mainScene.getStylesheets().add(getClass().getResource("../main.css").toExternalForm());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         window.setScene(mainScene);
         // 窗体设置
         window.setTitle("医疗保险报销系统");
@@ -122,8 +126,17 @@ public class Main extends Application{
             frame.setLeft(s.getLeftBar());
             this.setLeftBarActive(0);
         });
-        btB.setDisable(true);btC.setDisable(true);btF.setDisable(true);
-
+        btB.setOnAction(e->{
+            BaoxiaoPane b=new BaoxiaoPane(this);
+            push(b);
+            frame.setLeft(b.getLeftBar());
+            this.setLeftBarActive(0);
+        });
+        btC.setDisable(true);
+        btF.setOnAction(e->{
+            this.push(new Query(this));
+            this.frame.setLeft(null);
+        });
         Label titles=new Label("欢迎进入医疗保险中心报销系统");
         vBox.setStyle("-fx-alignment:center;-fx-spacing:30");
         titles.setStyle("-fx-label-padding: 10,10,10,10");
@@ -138,10 +151,10 @@ public class Main extends Application{
         HBox hBox=new HBox();
         hBox.setSpacing(30);
         Button btBack=new Button("后退");
-        btBack.setStyle("-fx-background-color: red;-fx-font-size: 16;");
+        btBack.setStyle("-fx-background-color: #1fff1b;-fx-font-size: 16;");
         btBack.setOnAction(e->goBack());
         Button btReturn=new Button("返回首页");
-        btReturn.setStyle("-fx-background-color: green;-fx-font-size: 16");
+        btReturn.setStyle("-fx-background-color: #17d61a;-fx-font-size: 16");
         btReturn.setOnAction(e->goMain());
         hBox.getChildren().addAll(btBack,btReturn,new Label("欢迎! "+loginId));
         hBox.setAlignment(Pos.BOTTOM_LEFT);

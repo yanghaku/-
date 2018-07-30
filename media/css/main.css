@@ -1,0 +1,28 @@
+.root{
+    -fx-font-size: 23px;
+    -fx-background-image: url("../media/image/timg.jpg");
+    -fx-background-repeat:no-repeat;
+    -fx-background-position: 100%;
+    -fx-font-family: "Palatino Linotype";
+}
+
+.button{
+    -fx-background-color: cyan;
+    -fx-spacing: 0;
+    -fx-border-radius: 70%;
+}
+.button:hover{
+    -fx-background-color: aliceblue;
+    -fx-font-weight: bold;
+}
+.text-field{
+    -fx-border-style: hidden;
+    -fx-border-radius: 50%;
+}
+.choice-box{
+    -fx-background-color: aquamarine;
+    -fx-border-style: hidden;
+}
+#exit:hover{
+    -fx-background-color: red;
+}

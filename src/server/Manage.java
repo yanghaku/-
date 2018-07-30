@@ -1,9 +1,11 @@
 package server;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.TreeMap;
 import server.RegistedObj.ObjName;
+import server.Log.Log;
 
 /**
  * @author yangbo
@@ -35,10 +37,12 @@ public class Manage{
     }
 
     public boolean set(String idName,ObjName objname,String code,InfoObject newObj){
+        Log.addLog((new Date()).toString()+"_"+idName+"_set_"+objname.toString()+"_"+code+"\r\n");
         return catalogs.get(objname).set(code,newObj);
     }
 
     public void delete(String idName,ObjName objName,String code){
+        Log.addLog((new Date()).toString()+"_"+idName+"_delete_"+objName.toString()+"_"+code+"\r\n");
         catalogs.get(objName).delete(code);
     }
 
@@ -46,7 +50,8 @@ public class Manage{
         return catalogs.get(objName).find(code);
     }
 
-    public void add(String idName,ObjName objName,InfoObject obj){
+    public void add(String idName,ObjName objName,InfoObject obj) {
+        Log.addLog((new Date()).toString()+"_"+idName+"_add_"+objName.toString()+"_"+obj.code+"\r\n");
         catalogs.get(objName).add(obj);
     }
 
@@ -64,6 +69,7 @@ public class Manage{
         return this.calculationParameter;
     }
     public void setParameter(String Id,CalculationParameter newObj)throws IOException{
+        Log.addLog((new Date()).toString()+"_"+Id+"_set_calculationParameter\r\n");
         this.calculationParameter=newObj;
         this.calculationParameter.update();
     }
@@ -76,6 +82,7 @@ public class Manage{
      *   数据库的初始化(重新构建) 所有文件都会清空, 系统管理员才可用
      */
     public void clearAndBuild(String Id)throws IOException{
+        Log.addLog((new Date()).toString()+"_"+Id+"_cleardatabase\r\n");
         RegistedObj.clearAndBuild();
     }
 }

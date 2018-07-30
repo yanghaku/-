@@ -38,11 +38,24 @@ public class Person extends InfoObject {
     private boolean farmer;     // 农民标志
     private boolean soldier;    // 军转人员标志
     private String protectId;   // 社保卡号
+    private String instituton;  //定点医疗机构编号
+
+    /*
+        以下信息为个人在医保中心报销的信息,
+    本年住院次数、上次出院时间、上次出院诊断、本年中心报销累计、本年个人自费累计、本年医疗费用累计
+    */
+    private int hospitalNum;  //住院次数
+    private Date lastHospitalDate;//上次出院时间
+    private String lastHospitalStatus;//上次住院诊断
+    private double baoXiao;  //本年度中心报销累计
+    private double ziFei;   // 本年度个人自费累计
+    private double total;   // 本年度医疗费用累计
+
 
     public Person( String code,String idType,String idNum,String name,PersonType type,boolean Man,String race, Date birthDate,
            Date workDate,Date retire,boolean retired,String idArea,String educated,String political,
            String workForm,String remark,String associationCode,String health,boolean modelWork,
-           boolean leader,boolean inDataBase, boolean farmer, boolean soldier){
+           boolean leader,boolean inDataBase, boolean farmer, boolean soldier,String instituton){
         super(code);
         this.idType=idType;
         this.idNum=idNum;
@@ -66,6 +79,7 @@ public class Person extends InfoObject {
         this.inDataBase=inDataBase;
         this.farmer=farmer;
         this.soldier=soldier;
+        this.instituton=instituton;
         this.protectId=null;
     }
 
@@ -111,6 +125,14 @@ public class Person extends InfoObject {
 
     public String getIdNum() {
         return idNum;
+    }
+
+    public String getInstituton() {
+        return instituton;
+    }
+
+    public void setInstituton(String instituton) {
+        this.instituton = instituton;
     }
 
     public String getIdType() {
@@ -259,8 +281,53 @@ public class Person extends InfoObject {
         return (obj instanceof Person) && (((Person) obj).getCode().equals(code));
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
+
+    public Date getLastHospitalDate() {
+        return lastHospitalDate;
     }
+
+    public double getBaoXiao() {
+        return baoXiao;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public double getZiFei() {
+        return ziFei;
+    }
+
+    public void setLastHospitalDate(Date lastHospitalDate) {
+        this.lastHospitalDate = lastHospitalDate;
+    }
+
+    public int getHospitalNum() {
+        return hospitalNum;
+    }
+
+    public void setZiFei(double ziFei) {
+        this.ziFei = ziFei;
+    }
+
+    public String getLastHospitalStatus() {
+        return lastHospitalStatus;
+    }
+
+    public void setBaoXiao(double baoXiao) {
+        this.baoXiao = baoXiao;
+    }
+
+    public void setHospitalNum(int hospitalNum) {
+        this.hospitalNum = hospitalNum;
+    }
+
+    public void setLastHospitalStatus(String lastHospitalStatus) {
+        this.lastHospitalStatus = lastHospitalStatus;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
 }
